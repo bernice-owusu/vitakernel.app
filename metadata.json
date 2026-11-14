@@ -1,0 +1,8 @@
+{
+  "name": "Vitakernel",
+  "description": "Turning mango by-products into valuable resources through sustainable mango seed oil extraction and biomass briquette production.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
