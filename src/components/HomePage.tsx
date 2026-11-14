@@ -34,7 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[#F7F5EC]">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-[#F7F5EC] border-b border-[#292D2A]/10 overflow-hidden">
+      <section className="relative bg-white border-b border-[#292D2A]/10 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 items-stretch md:min-h-[480px] lg:min-h-[600px]">
             {/* Left Copy Column */}
@@ -97,7 +97,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 aria-hidden="true"
                 className="md:hidden absolute top-0 left-0 w-full h-9 sm:h-11 z-10 pointer-events-none"
               >
-                <path d="M0,0 L800,0 L800,26 C560,68 240,68 0,26 Z" fill="#F7F5EC" />
+                <path d="M0,0 L800,0 L800,26 C560,68 240,68 0,26 Z" fill="#FFFFFF" />
                 <path
                   d="M0,26 C240,68 560,68 800,26 L800,40 C560,82 240,82 0,40 Z"
                   fill="#E5A928"
@@ -111,7 +111,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 aria-hidden="true"
                 className="hidden md:block absolute left-0 top-0 h-full w-20 lg:w-32 z-10 pointer-events-none"
               >
-                <path d="M0,0 L145,0 C45,170 20,420 90,600 L0,600 Z" fill="#F7F5EC" />
+                <path d="M0,0 L145,0 C45,170 20,420 90,600 L0,600 Z" fill="#FFFFFF" />
                 <path
                   d="M145,0 C45,170 20,420 90,600 L118,600 C48,420 73,170 172,0 Z"
                   fill="#E5A928"
