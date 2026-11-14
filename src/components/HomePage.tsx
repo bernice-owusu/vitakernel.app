@@ -88,7 +88,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               initial={{ opacity: 0.25 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: HERO_EASE }}
-              className="md:col-span-6 relative aspect-[4/3] sm:aspect-[16/9] md:aspect-auto md:min-h-[480px] lg:min-h-[600px] overflow-hidden"
+              className="md:col-span-6 relative aspect-[4/3] sm:aspect-[16/9] md:aspect-auto md:min-h-[480px] lg:min-h-[600px] overflow-hidden md:overflow-visible"
             >
               {/* Mobile Horizontal Curved Gold Sweep */}
               <svg
@@ -121,7 +121,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <ResilientImage
                 src={IMAGES.hero}
                 alt="Fresh ripe mangoes with glossy leaves beside a corked bottle of golden mango seed oil and stacked biomass briquettes"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover md:absolute md:inset-y-0 md:left-0 md:w-[50vw] md:max-w-none"
                 fallbackTitle="Mango Seed Oil & Biomass Briquettes"
               />
             </motion.div>

@@ -50,16 +50,7 @@ export const COMPANY_INFO = {
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'home', label: 'Home' },
-  {
-    id: 'about',
-    label: 'About Us',
-    children: [
-      { label: 'Company Overview', route: 'about', anchor: 'overview', description: 'Who we are and our agro-processing focus' },
-      { label: 'Our Story', route: 'about', anchor: 'story', description: 'Unlocking value from mango-derived materials' },
-      { label: 'Vision & Mission', route: 'about', anchor: 'vision-mission', description: 'Our long-term direction and core values' },
-      { label: 'Sustainability', route: 'sustainability', description: 'Resource efficiency and responsible processing' },
-    ],
-  },
+  { id: 'about', label: 'About Us' },
   {
     id: 'products',
     label: 'Our Products',
