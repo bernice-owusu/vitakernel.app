@@ -124,15 +124,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
                 {hasChildren && isOpen && (
                   <div className="absolute left-0 top-full pt-1.5 w-72 z-50 menu-reveal">
                     <div className="bg-white rounded-xl border border-[#292D2A]/10 shadow-lg p-2">
-                      <button
-                        type="button"
-                        onClick={() => handleLinkClick(item.id)}
-                        className="w-full text-left px-3 py-2 rounded-lg hover:bg-[#F7F5EC] transition-colors cursor-pointer border-b border-[#292D2A]/8 mb-1"
-                      >
-                        <div className="text-xs font-semibold text-[#174D35]">
-                          View {item.label} Overview
-                        </div>
-                      </button>
                       {item.children!.map((child) => (
                         <button
                           key={`${child.route}-${child.label}`}
@@ -142,9 +133,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
                         >
                           <div className="text-sm font-medium text-[#292D2A] group-hover:text-[#174D35]">
                             {child.label}
-                          </div>
-                          <div className="text-xs text-[#292D2A]/60 mt-0.5 line-clamp-1">
-                            {child.description}
                           </div>
                         </button>
                       ))}
@@ -223,9 +211,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
                           className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-medium text-[#292D2A]/80 hover:bg-white hover:text-[#174D35] cursor-pointer block min-h-[44px]"
                         >
                           <div>{child.label}</div>
-                          <div className="text-xs text-[#292D2A]/55 font-normal mt-0.5">
-                            {child.description}
-                          </div>
                         </button>
                       ))}
                     </div>
