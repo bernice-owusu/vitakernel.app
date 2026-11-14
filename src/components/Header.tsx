@@ -60,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-[#F7F5EC]/95 backdrop-blur-md border-b border-[#292D2A]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between gap-4 lg:gap-6">
         {/* Zone 1: Brand Wordmark */}
@@ -176,6 +177,7 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
           </button>
         </div>
       </div>
+    </header>
 
       {/* Responsive Mobile & Tablet Navigation Drawer */}
       {mobileMenuOpen && (
@@ -264,6 +266,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate }) => {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };

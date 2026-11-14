@@ -28,6 +28,14 @@ interface ContactPageProps {
   onNavigate?: (route: PageRoute, anchor?: string, prefillProduct?: string) => void;
 }
 
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID?.trim();
+const FORMSPREE_ENDPOINT = FORMSPREE_ID
+  ? FORMSPREE_ID.startsWith('http')
+    ? FORMSPREE_ID
+    : `https://formspree.io/f/${FORMSPREE_ID}`
+  : '';
+const ENQUIRY_CC = 'info@vitakernel.com,inkadumah@vitakernel.com';
+
 interface FormState {
   fullName: string;
   company: string;
@@ -58,6 +66,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   });
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
   const [whatsappNote, setWhatsappNote] = useState<string>('');
   const [whatsappOpen, setWhatsappOpen] = useState(false);
@@ -88,8 +97,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     if (errorMsg) setErrorMsg(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!form.fullName.trim()) {
       setErrorMsg('Please enter your full name.');
       return;
@@ -103,10 +113,71 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       setErrorMsg('Please include brief details about your enquiry or quantity requirements.');
       return;
     }
+    if (!FORMSPREE_ENDPOINT) {
+      setErrorMsg(
+        'Email delivery is not configured yet. Please add VITE_FORMSPREE_ID to the environment and redeploy.'
+      );
+      return;
+    }
 
-    const refCode = `VK-${Math.floor(100000 + Math.random() * 900000)}`;
-    setSubmittedRef(refCode);
+    setIsSubmitting(true);
     setErrorMsg(null);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.fullName.trim(),
+          fullName: form.fullName.trim(),
+          company: form.company.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          country: form.country.trim(),
+          enquiryType: form.enquiryType,
+          productOfInterest: form.productOfInterest,
+          estimatedQuantity: form.estimatedQuantity.trim(),
+          message: form.message.trim(),
+          _replyto: form.email.trim(),
+          _subject: `Vitakernel enquiry (${form.enquiryType}) – ${form.fullName.trim()}`,
+          _cc: ENQUIRY_CC,
+          _gotcha: '',
+        }),
+      });
+
+      if (!response.ok) {
+        let detail = '';
+        try {
+          const data = await response.json();
+          if (Array.isArray(data?.errors) && data.errors.length > 0) {
+            detail = data.errors
+              .map((err: { message?: string }) => err.message)
+              .filter(Boolean)
+              .join(' ');
+          }
+        } catch {
+          // Ignore malformed error payloads.
+        }
+        throw new Error(
+          detail ||
+            'We could not send your enquiry right now. Please try again or email info@vitakernel.com directly.'
+        );
+      }
+
+      const refCode = `VK-${Math.floor(100000 + Math.random() * 900000)}`;
+      setSubmittedRef(refCode);
+    } catch (err) {
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : 'We could not send your enquiry right now. Please try again or email info@vitakernel.com directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
@@ -548,10 +619,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   </p>
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#E5A928] hover:bg-[#D2971C] text-[#292D2A] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap w-full sm:w-fit min-h-[44px]"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#E5A928] hover:bg-[#D2971C] disabled:opacity-60 disabled:cursor-not-allowed text-[#292D2A] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap w-full sm:w-fit min-h-[44px]"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Enquiry</span>
+                    <span>{isSubmitting ? 'Sending…' : 'Send Enquiry'}</span>
                   </button>
                 </div>
               </form>
