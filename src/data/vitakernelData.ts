@@ -20,13 +20,13 @@ export interface NavItem {
 }
 
 export const IMAGES = {
-  hero: '/src/assets/images/hero_mango_oil_briquettes_1794615082226.jpg',
-  facility: '/src/assets/images/facility_exterior_1794615082250.jpg',
-  mangoOil: '/src/assets/images/mango_seed_oil_kernels_1794615082101.jpg',
-  briquettes: '/src/assets/images/biomass_briquettes_stack_1794615083470.jpg',
-  machinery: '/src/assets/images/extraction_machinery_1794615083906.jpg',
-  sustainability: '/src/assets/images/sustainability_sprout_1794615083632.jpg',
-  orchard: '/src/assets/images/orchard_mangoes_branch_1794615084191.jpg',
+  hero: '/assets/images/hero_mango_oil_briquettes_1794615082226.jpg',
+  facility: '/assets/images/facility_exterior_1794615082250.jpg',
+  mangoOil: '/assets/images/mango_seed_oil_kernels_1794615082101.jpg',
+  briquettes: '/assets/images/biomass_briquettes_stack_1794615083470.jpg',
+  machinery: '/assets/images/extraction_machinery_1794615083906.jpg',
+  sustainability: '/assets/images/sustainability_sprout_1794615083632.jpg',
+  orchard: '/assets/images/orchard_mangoes_branch_1794615084191.jpg',
 } as const;
 
 export const LOGO_URL = '/assets/vitakernel-logo.png';
